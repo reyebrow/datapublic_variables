@@ -24,7 +24,7 @@ function datapublic_variables_install() {
     );
     $block_data[] = array(
       'module' => 'views',
-      'delta' => 'tweets-block',
+      'delta' => 'new_tweets-block',
       'css_class' => 'four',
     );
     $block_data[] = array(
