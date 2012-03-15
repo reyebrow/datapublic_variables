@@ -73,12 +73,12 @@ function datapublic_variables_strongarm() {
   $strongarm->value = 'public';
   $export['file_default_scheme'] = $strongarm;
 
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  /*$strongarm = new stdClass;
+  $strongarm->disabled = FALSE;
   $strongarm->api_version = 1;
   $strongarm->name = 'fullcalendar_path';
-  $strongarm->value = 'sites/all/libraries/fullcalendar';
-  $export['fullcalendar_path'] = $strongarm;
+  $strongarm->value = 'profiles/datapublic/libraries/fullcalendar/fullcalendar';
+  $export['fullcalendar_path'] = $strongarm;*/
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
