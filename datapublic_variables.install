@@ -109,11 +109,24 @@ function datapublic_variables_install() {
   }		
 
   // Setting the main content area block region and weight...
-  db_query("UPDATE {block} SET status = 1, region = 'content', weight = -25 WHERE module = 'system' AND delta = 'main'");
+  $block_updated = db_update('block')
+    ->fields(array(
+    'status' => 1,
+    'region' => 'content',
+    'weight' => -25,
+  ))
+  ->condition('module', 'system')
+  ->condition('delta', 'main')
+  ->execute();
 
   // Remove the title from the superfish menu block...
   if(module_exists('superfish')) {
-    db_query("UPDATE {block} SET title ='<none>' WHERE module = 'superfish' AND delta = '1'");
+    $title_updated = db_update('block') 
+    ->fields(array(
+      'title' => '<none>',
+    ))
+    ->condition('module', 'superfish')
+    ->condition('delta', 1)
+    ->execute();
   }
-
 }																										  
