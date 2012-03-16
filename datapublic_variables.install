@@ -21,7 +21,7 @@ function datapublic_variables_enable() {
       'title' => '<none>',
     ))
     ->condition('module', 'superfish')
-    ->condition('delta', 1)
+    ->condition('delta', '1')
     ->execute();
   }
 }
