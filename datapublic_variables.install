@@ -3,30 +3,37 @@
  * Implements hook_enable()
  */
 function datapublic_variables_enable() {
-  $rowCount = db_query("SELECT * FROM {block} WHERE module = 'superfish' AND delta = '1'")->rowCount();
-  drupal_set_message(print_r('<pre>Ran hook_enable, got this many rows: ' . $rowCount . '</pre>', TRUE), 'status');
-
-  // Setting the main content area block region and weight...
-  $block_updated = db_update('block')
-    ->fields(array(
-    'status' => 1,
-    'region' => 'content',
-    'weight' => -25,
-  ))
-  ->condition('module', 'system')
-  ->condition('delta', 'main')
-  ->execute();
-
-  // Remove the title from the superfish menu block...
-  if(module_exists('superfish')) {
-    $title_updated = db_update('block') 
-    ->fields(array(
+  // Finally found a way to set the title on the superfish block and the region for the main content block...
+  $blocks = array(
+    array(
+      'module' => 'system',
+      'delta' => 'main',
+      'theme' => 'datapublic_theme',
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content',
+      'pages' => '',
+      'title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'superfish',
+      'delta' => '1',
+      'theme' => 'datapublic_theme',
+      'status' => 0,
+      'weight' => -9,
+      'region' => '-1',
+      'pages' => '',
       'title' => '<none>',
-    ))
-    ->condition('module', 'superfish')
-    ->condition('delta', '1')
-    ->execute();
+      'cache' => -1,
+    ),
+  );
+  $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'title', 'cache'));
+  foreach ($blocks as $block) {
+    $query->values($block);
   }
+  $query->execute();
+
 } 
 
 
