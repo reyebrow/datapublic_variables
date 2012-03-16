@@ -1,32 +1,5 @@
 <?php 
 /**
- * Implements hook_enable()
- */
-function datapublic_variables_enable() {
-  // Setting the main content area block region and weight...
-  $block_updated = db_update('block')
-    ->fields(array(
-    'status' => 1,
-    'region' => 'content',
-    'weight' => -25,
-  ))
-  ->condition('module', 'system')
-  ->condition('delta', 'main')
-  ->execute();
-
-  // Remove the title from the superfish menu block...
-  if(module_exists('superfish')) {
-    $title_updated = db_update('block') 
-    ->fields(array(
-      'title' => '<none>',
-    ))
-    ->condition('module', 'superfish')
-    ->condition('delta', '1')
-    ->execute();
-  }
-}
-
-/**
  * Implements hook_install()
 */
 function datapublic_variables_install() {
